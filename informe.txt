@@ -1,0 +1,63 @@
+1) Problemática:
+La problemática consiste en rellenar huecos en una señal de audio generada a partir de una onda senoidal, 
+usando interpolación para simular la continuidad de la señal en puntos donde los valores de amplitud están 
+ausentes (por ejemplo, por la presencia de valores nulos). En muchos sistemas de procesamiento de audio, 
+se pueden presentar interrupciones o huecos en la señal que dificultan el análisis o la reproducción continua. 
+La interpolación es una técnica adecuada para estimar los valores de la señal en esos huecos, garantizando la 
+suavidad y continuidad de la onda.
+
+2) Aspectos a considerar en el código Python:
+Imprescindibles:
+Implementación de interpolación Polinomica: El código utiliza la interpolación Polinomica para rellenar los valores nulos en 
+la señal de audio. Este método permite estimar la amplitud de la señal de manera más precisa en comparación con la 
+interpolación lineal y la Spline, especialmente para señales no lineales, al garantizar una transición suave en los valores interpolados.
+
+Generación de datos de muestra de audio: Para simular la señal de audio, se generan datos que consisten en una secuencia 
+de muestras de amplitudes basadas en una onda senoidal. Luego, se introducen valores nulos en ciertas posiciones 
+para simular huecos en la señal. Este enfoque evita la necesidad de trabajar con un archivo de audio real y permite 
+un procesamiento directo en Python.
+
+Importantes:
+Manejo de valores nulos (NaN): El código es capaz de manejar correctamente los valores nulos en la señal, tanto durante 
+la interpolación como al momento de generar y cargar los datos de audio.
+
+Función de interpolación flexible: El código permite aplicar diferentes métodos de interpolación (lineal, polinómica, spline)
+y es fácil de modificar para incorporar otros métodos en el futuro.
+
+Deseables:
+Visualización gráfica: El código utiliza matplotlib para graficar la señal de audio antes y después de la interpolación. 
+Esto permite verificar visualmente cómo la interpolación polinómica ha rellenado los huecos en la señal y comparar los puntos 
+originales con los interpolados.
+
+3) Grilla a utilizar:
+Para los valores de amplitud, se utilizan muestras discretas con precisión de 7 decimales, ya que los rangos de 
+valores están normalizados entre -1 y 1. No se utiliza una grilla específica para los valores de muestreo, ya que
+los puntos de muestreo son enteros y se generan automáticamente según el rango temporal de la señal.
+
+4) Resultados y conclusiones:
+Resultados:
+El programa calcula la amplitud de la señal de audio en los puntos donde había valores nulos utilizando la interpolación polinómica. 
+Se muestra el resultado en la consola y también se grafican los valores originales junto con los interpolados para facilitar la 
+comparación visual. Al iniciar el programa, se pregunta al usuario qué método de interpolación desea usar, permitiendo comparar 
+la interpolación polinómica con otros métodos, como la interpolación lineal.
+
+Conclusiones:
+La interpolación polinómica demostró ser significativamente más precisa y adecuada para este caso, ya que garantiza transiciones 
+suaves y continuas entre los valores interpolados. Aunque la interpolación lineal puede ser suficiente cuando los huecos en 
+la señal son pocos y están muy próximos, en señales con mayor cantidad de huecos o características no lineales, la interpolación 
+polinómica produce resultados superiores, evitando aproximaciones abruptas o artefactos en la señal. Este enfoque asegura la 
+continuidad de la señal de audio sin interrupciones perceptibles y es ideal para aplicaciones donde la calidad del sonido es crítica.
+
+5) Referencias:
+https://recoverit.wondershare.es/audio-repair/what-is-dithering-audio.html#:~:text=Conocer%20la%20interpolaci%C3%B3n%20es%20importante,por%20un%20error%20de%20cuantificaci%C3%B3n
+
+6) Buena práctica en el desarrollo de código Python:
+
+Modularización del código: El código se divide en funciones específicas (como spline_interpolation, generate_audio_data, 
+load_audio_data, etc.), lo que facilita la reutilización y el mantenimiento.
+
+Validación de entradas y manejo de excepciones: Se asegura que los valores nulos en los datos de amplitud sean tratados 
+correctamente para evitar errores durante la interpolación.
+
+Comentarios descriptivos y legibilidad del código: Cada función está debidamente comentada para explicar su propósito, 
+lo que mejora la comprensión y facilita futuras modificaciones.
